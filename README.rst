@@ -8,8 +8,8 @@ Command and mappings
 --------------------
 
 This plugin provides a unique command, ``:Scratch``, which opens a scratch
-buffer in a full-width window at the top of your screen. This buffer exists
-until VIM is closed.
+buffer in a dynamically sized full-width window at the top of your screen. This
+buffer exists until VIM is closed.
 
 You can use the ``:Scratch!`` version of the command to reset the scratch
 buffer before opening it.
@@ -25,7 +25,9 @@ Configuration
 
 * ``g:scratch_autohide``, by default the scratch window closes automatically
   when leaving the buffer. Set this to 0 to disable this behavior [default: 1].
-* ``g:scratch_height``, the height of the scratch buffer window [default: 10].
+* ``g:scratch_height``, the minimum and maximum height of the scratch buffer
+  window. If you prefer a fixed height window, set both values equal [default:
+  [10, 20]].
 
 
 Bonus

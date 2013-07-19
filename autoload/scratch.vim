@@ -20,6 +20,7 @@ function! scratch#open(reset)
       silent execute '%d'
     endif
   endif
+  call s:resize_scratch()
 endfunction
 
 function! scratch#add_and_open(reset) range
@@ -33,19 +34,21 @@ function! scratch#add_and_open(reset) range
   endif
   call append(current_scratch_line, selected_lines)
   silent execute 'normal! G'
+  call s:resize_scratch()
 endfunction
 
 function! s:on_open_scratch(fresh)
-  " size window appropriately, etc.
-  execute 'wincmd K'
-  execute 'resize ' . g:scratch_height
+  " set local options and setup autoclosing
   if a:fresh
     let b:autoclose = 1
     setlocal bufhidden=hide
     setlocal buflisted
     setlocal buftype=nofile
+    setlocal foldcolumn=0
+    setlocal nofoldenable
     setlocal nonumber
     setlocal noswapfile
+    setlocal scrolloff=0
     setlocal winfixheight
     augroup scratch
       autocmd!
@@ -55,6 +58,16 @@ function! s:on_open_scratch(fresh)
       endif
     augroup end
   endif
+endfunction
+
+function! s:resize_scratch()
+  " size window appropriately
+  execute 'wincmd K'
+  let total_lines = line('$')
+  let min_height = g:scratch_height[0]
+  let max_height = g:scratch_height[1]
+  let height = min([max_height, max([min_height, total_lines])])
+  execute "resize " . height
 endfunction
 
 function! s:on_enter_scratch()

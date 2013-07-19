@@ -4,7 +4,7 @@ if !exists('g:scratch_autohide')
   let g:scratch_autohide = 1
 endif
 if !exists('g:scratch_height')
-  let g:scratch_height = 10
+  let g:scratch_height = [10, 20]
 endif
 
 command! -bang -nargs=0 Scratch call scratch#open(<bang>0)
