@@ -5,7 +5,15 @@ function! scratch#open(reset)
   let scr_bufnum = bufnr('__Scratch__')
   if scr_bufnum == -1
     execute 'new __Scratch__'
-    call s:on_open_scratch(1)
+    setlocal bufhidden=hide
+    setlocal buflisted
+    setlocal buftype=nofile
+    setlocal foldcolumn=0
+    setlocal nofoldenable
+    setlocal nonumber
+    setlocal noswapfile
+    setlocal scrolloff=0
+    setlocal winfixheight
   else
     let scr_winnum = bufwinnr(scr_bufnum)
     if scr_winnum != -1
@@ -14,7 +22,6 @@ function! scratch#open(reset)
       endif
     else
       execute "split +buffer" . scr_bufnum
-      call s:on_open_scratch(0)
     endif
     if a:reset
       silent execute '%d'
@@ -35,29 +42,6 @@ function! scratch#add_and_open(reset) range
   call append(current_scratch_line, selected_lines)
   silent execute 'normal! G'
   call s:resize_scratch()
-endfunction
-
-function! s:on_open_scratch(fresh)
-  " set local options and setup autoclosing
-  if a:fresh
-    let b:autoclose = 1
-    setlocal bufhidden=hide
-    setlocal buflisted
-    setlocal buftype=nofile
-    setlocal foldcolumn=0
-    setlocal nofoldenable
-    setlocal nonumber
-    setlocal noswapfile
-    setlocal scrolloff=0
-    setlocal winfixheight
-    augroup scratch
-      autocmd!
-      autocmd BufEnter __Scratch__ call s:on_enter_scratch()
-      if g:scratch_autohide
-        autocmd BufLeave __Scratch__ close
-      endif
-    augroup end
-  endif
 endfunction
 
 function! s:resize_scratch()
@@ -81,3 +65,11 @@ function! s:on_enter_scratch()
     endif
   endif
 endfunction
+
+augroup scratch
+  autocmd!
+  autocmd BufEnter __Scratch__ call s:on_enter_scratch()
+  if g:scratch_autohide
+    autocmd BufLeave __Scratch__ close
+  endif
+augroup end
