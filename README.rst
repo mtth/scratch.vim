@@ -25,9 +25,7 @@ Configuration
 
 * ``g:scratch_autohide``, by default the scratch window closes automatically
   when leaving the buffer. Set this to 0 to disable this behavior [default: 1].
-* ``g:scratch_height``, the minimum and maximum height of the scratch buffer
-  window. If you prefer a fixed height window, set both values equal [default:
-  [10, 20]].
+* ``g:scratch_height``, the height of the scratch buffer window [default: 10].
 * ``g:scratch_insert``, automatically start insert mode when entering the 
   scratch buffer. If ``g:scratch_autohide`` is also set, the scratch buffer 
   will also be closed when leaving insert mode (you can still use ``<c-c>`` to 
