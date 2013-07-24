@@ -14,5 +14,5 @@ command! -bang -nargs=0 Scratch call scratch#open(<bang>0)
 
 nnoremap gs :call scratch#open(0, 0)<cr>
 nnoremap gS :call scratch#open(1, 0)<cr>
-vnoremap gs :call scratch#open(0, 1)<cr>
+vnoremap gs :call scratch#open(1, 1)<cr>
 nnoremap gZzZz gs

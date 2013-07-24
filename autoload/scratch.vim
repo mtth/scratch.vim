@@ -2,12 +2,13 @@
 "
 " TODO: check if in command window before opening scratch (or simply yield an
 " explicit error), currently the execute doesn't work.
-" BUG: <c-c> seems to trigger InsertLeave, but only when a buffer has been
-" opened.
+" BUG: <c-c> seems to trigger InsertLeave, but only when another buffer had
+" already been opened.
 "
 
 function! scratch#open(reset, selection) range
   " open scratch buffer
+  let selected_lines = getline(a:firstline, a:lastline)
   let scr_bufnum = bufnr('__Scratch__')
   if scr_bufnum == -1
     execute 'topleft ' . g:scratch_height . 'new __Scratch__'
@@ -35,20 +36,18 @@ function! scratch#open(reset, selection) range
     endif
   endif
   if a:selection
-    let selected_lines = getline(a:firstline, a:lastline)
-    call scratch#open(a:reset)
+    " paste selection in scratch buffer
     let current_scratch_line = line('$')
     if !strlen(getline(current_scratch_line))
       " line is empty, we overwrite it
       let current_scratch_line -= 1
     endif
     call append(current_scratch_line, selected_lines)
+    " remove indents and go to end
+    normal gg=GG
   endif
   if g:scratch_insert
-    normal! Gzb
     startinsert!
-  else
-    normal! G
   endif
 endfunction
 
