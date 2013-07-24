@@ -75,9 +75,9 @@ augroup scratch
   autocmd!
   autocmd BufEnter __Scratch__ call s:on_enter_scratch()
   if g:scratch_autohide
-    autocmd BufLeave __Scratch__ close
+    autocmd BufLeave __Scratch__ nested close
     if g:scratch_insert
-      autocmd InsertLeave __Scratch__ close
+      autocmd InsertLeave __Scratch__ nested close
     endif
   endif
-augroup end
+augroup END
