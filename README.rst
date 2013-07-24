@@ -28,6 +28,10 @@ Configuration
 * ``g:scratch_height``, the minimum and maximum height of the scratch buffer
   window. If you prefer a fixed height window, set both values equal [default:
   [10, 20]].
+* ``g:scratch_insert``, automatically start insert mode when entering the 
+  scratch buffer. If ``g:scratch_autohide`` is also set, the scratch buffer 
+  will also be closed when leaving insert mode (you can still use ``<c-c>`` to 
+  stay in the buffer) [default: 1].
 
 
 Bonus

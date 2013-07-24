@@ -8,6 +8,7 @@ function! scratch#open(reset)
     setlocal bufhidden=hide
     setlocal buflisted
     setlocal buftype=nofile
+    setlocal filetype=scratch
     setlocal foldcolumn=0
     setlocal nofoldenable
     setlocal nonumber
@@ -52,6 +53,10 @@ function! s:resize_scratch()
   let max_height = g:scratch_height[1]
   let height = min([max_height, max([min_height, total_lines])])
   execute "resize " . height
+  if g:scratch_insert
+    normal! Gzb
+    startinsert!
+  endif
 endfunction
 
 function! s:on_enter_scratch()
@@ -71,5 +76,8 @@ augroup scratch
   autocmd BufEnter __Scratch__ call s:on_enter_scratch()
   if g:scratch_autohide
     autocmd BufLeave __Scratch__ close
+    if g:scratch_insert
+      autocmd InsertLeave __Scratch__ close
+    endif
   endif
 augroup end
