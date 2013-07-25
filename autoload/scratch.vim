@@ -20,7 +20,6 @@ function! scratch#open(reset, selection) range
     setlocal nofoldenable
     setlocal nonumber
     setlocal noswapfile
-    setlocal scrolloff=0
     setlocal winfixheight
   else
     let scr_winnum = bufwinnr(scr_bufnum)
