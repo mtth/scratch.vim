@@ -1,13 +1,15 @@
 " scratch.vim autoload
 "
-" TODO: check if in command window before opening scratch (or simply yield an
-" explicit error), currently the execute doesn't work.
-" BUG: <c-c> seems to trigger InsertLeave, but only when another buffer had
+" BUG: <c-c> seems to trigger InsertLeave when another buffer has
 " already been opened.
 "
 
 function! scratch#open(reset, selection) range
   " open scratch buffer
+  if bufname('%') ==# '[Command Line]'
+    echoerr 'Unable to open scratch buffer from command line window.'
+    return
+  endif
   let selected_lines = getline(a:firstline, a:lastline)
   let scr_bufnum = bufnr('__Scratch__')
   if scr_bufnum == -1
@@ -62,13 +64,20 @@ function! s:on_enter_scratch()
   endif
 endfunction
 
+function! s:close_scratch()
+  " close scratch window and return to previous buffer
+  let prev_bufnr = bufnr('#')
+  close
+  execute bufwinnr(prev_bufnr) . 'wincmd w'
+endfunction
+
 augroup scratch
   autocmd!
-  autocmd BufEnter __Scratch__ call s:on_enter_scratch()
+  autocmd BufEnter __Scratch__ call <SID>on_enter_scratch()
   if g:scratch_autohide
-    autocmd BufLeave __Scratch__ nested close
+    autocmd BufLeave __Scratch__ call <SID>close_scratch()
     if g:scratch_insert
-      autocmd InsertLeave __Scratch__ nested close
+      autocmd InsertLeave __Scratch__ call <SID>close_scratch()
     endif
   endif
 augroup END
