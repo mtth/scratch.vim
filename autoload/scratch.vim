@@ -1,8 +1,5 @@
 " scratch.vim autoload
 "
-" BUG: <c-c> seems to trigger InsertLeave when another buffer has
-" already been opened.
-"
 
 function! scratch#open(reset, selection) range
   " open scratch buffer
@@ -75,9 +72,12 @@ augroup scratch
   autocmd!
   autocmd BufEnter __Scratch__ call <SID>on_enter_scratch()
   if g:scratch_autohide
-    autocmd BufLeave __Scratch__ call <SID>close_scratch()
     if g:scratch_insert
-      autocmd InsertLeave __Scratch__ call <SID>close_scratch()
+      autocmd InsertLeave __Scratch__ nested call <SID>close_scratch()
+    else
+      autocmd BufLeave __Scratch__ nested call <SID>close_scratch()
     endif
   endif
 augroup END
+
+" BUG: <c-c> seems to trigger InsertLeave sometimes.
