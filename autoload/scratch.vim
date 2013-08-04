@@ -1,16 +1,13 @@
-" scratch.vim autoload
-"
+" autoload/scratch.vim
 
-function! scratch#open(reset, selection) range
-  " open scratch buffer
-  if bufname('%') ==# '[Command Line]'
-    echoerr 'Unable to open scratch buffer from command line window.'
-    return
-  endif
-  let selected_lines = getline(a:firstline, a:lastline)
+" window handling
+
+function! s:open_window(position)
+  " open scratch buffer window and move to it
+  " this will create the buffer if necessary
   let scr_bufnum = bufnr('__Scratch__')
   if scr_bufnum == -1
-    execute 'topleft ' . g:scratch_height . 'new __Scratch__'
+    execute a:position . g:scratch_height . 'new __Scratch__'
     setlocal bufhidden=hide
     setlocal buflisted
     setlocal buftype=nofile
@@ -20,6 +17,10 @@ function! scratch#open(reset, selection) range
     setlocal nonumber
     setlocal noswapfile
     setlocal winfixheight
+    if g:scratch_autohide
+      autocmd BufEnter <buffer> call <SID>close_window(0)
+      autocmd BufLeave <buffer> call <SID>close_window(g:scratch_autohide)
+    endif
   else
     let scr_winnum = bufwinnr(scr_bufnum)
     if scr_winnum != -1
@@ -27,31 +28,18 @@ function! scratch#open(reset, selection) range
         execute scr_winnum . 'wincmd w'
       endif
     else
-      execute 'topleft ' . g:scratch_height . 'split +buffer' . scr_bufnum
+      execute a:position . g:scratch_height . 'split +buffer' . scr_bufnum
     endif
-    if a:reset
-      silent execute '%d'
-    endif
-  endif
-  if a:selection
-    " paste selection in scratch buffer
-    let current_scratch_line = line('$')
-    if !strlen(getline(current_scratch_line))
-      " line is empty, we overwrite it
-      let current_scratch_line -= 1
-    endif
-    call append(current_scratch_line, selected_lines)
-    " remove indents and go to end
-    normal gg=GG
-  endif
-  if g:scratch_insert
-    startinsert!
   endif
 endfunction
 
-function! s:on_enter_scratch()
-  " quit if scratch is last window open (or close tab)
-  if winbufnr(2) ==# -1
+function! s:close_window(force)
+  " close scratch window if it is the last window open, or if force
+  if a:force
+    let prev_bufnr = bufnr('#')
+    close
+    execute bufwinnr(prev_bufnr) . 'wincmd w'
+  elseif winbufnr(2) ==# -1
     if tabpagenr('$') ==# 1
       bdelete
       quit
@@ -61,23 +49,60 @@ function! s:on_enter_scratch()
   endif
 endfunction
 
-function! s:close_scratch()
-  " close scratch window and return to previous buffer
-  let prev_bufnr = bufnr('#')
-  close
-  execute bufwinnr(prev_bufnr) . 'wincmd w'
+" utility
+
+function! s:quick_insert()
+  " leave scratch window after leaving insert mode and remove corresponding autocommand
+  autocmd! InsertLeave <buffer>
+  call s:close_window(1)
 endfunction
 
-augroup scratch
-  autocmd!
-  autocmd BufEnter __Scratch__ call <SID>on_enter_scratch()
-  if g:scratch_autohide
-    if g:scratch_insert
-      autocmd InsertLeave __Scratch__ nested call <SID>close_scratch()
-    else
-      autocmd BufLeave __Scratch__ nested call <SID>close_scratch()
-    endif
-  endif
-augroup END
+function! s:get_selection()
+  " get current selection as list of lines, preserving registers
+  let [contents, type] = [getreg('"'), getregtype('"')]
+  try
+    execute 'normal! gvy'
+    return split(getreg('"'), '\n')
+  finally
+    call setreg('"', contents, type)
+  endtry
+endfunction
 
-" BUG: <c-c> seems to trigger InsertLeave sometimes.
+" public functions
+
+function! scratch#open(reset)
+  " sanity check and open scratch buffer
+  if bufname('%') ==# '[Command Line]'
+    echoerr 'Unable to open scratch buffer from command line window.'
+    return
+  endif
+  let position = g:scratch_top ? 'topleft ' : 'botright '
+  call s:open_window(position)
+  if a:reset
+    silent execute '%d'
+  else
+    silent execute 'normal! G$'
+  endif
+endfunction
+
+function! scratch#insert(reset)
+  " open scratch buffer
+  call scratch#open(a:reset)
+  autocmd InsertLeave <buffer> call <SID>quick_insert()
+  startinsert!
+endfunction
+
+function! scratch#copy(reset)
+  " paste selection in scratch buffer
+  let selection = s:get_selection()
+  call scratch#open(a:reset)
+  let last_scratch_line = line('$')
+  if last_scratch_line ==# 1 && !strlen(getline(1))
+    " line is empty, we overwrite it
+    call append(0, selection)
+    silent execute 'normal! Gdd$'
+  else
+    call append(last_scratch_line, selection)
+    silent execute 'normal! G$'
+  endif
+endfunction

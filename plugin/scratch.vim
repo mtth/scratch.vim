@@ -1,4 +1,8 @@
-" scratch.vim plugin
+" plugin/scratch.vim
+
+if (exists('g:scratch_disable') && g:scratch_disable) || &compatible
+  finish
+endif
 
 if !exists('g:scratch_autohide')
   let g:scratch_autohide = 1
@@ -6,13 +10,14 @@ endif
 if !exists('g:scratch_height')
   let g:scratch_height = 10
 endif
-if !exists('g:scratch_insert')
-  let g:scratch_insert = 1
+if !exists('g:scratch_top')
+  let g:scratch_top = 1
 endif
 
-command! -bang -nargs=0 Scratch call scratch#open(<bang>0, 0)
+command! -bang -nargs=0 Scratch call scratch#open(<bang>0)
 
-nnoremap gs :call scratch#open(0, 0)<cr>
-nnoremap gS :call scratch#open(1, 0)<cr>
-vnoremap gs :call scratch#open(0, 1)<cr>
+nnoremap <silent> gs :call scratch#insert(0)<cr>
+nnoremap <silent> gS :call scratch#insert(1)<cr>
+xnoremap <silent> gs :<c-u>call scratch#copy(0)<cr>
+xnoremap <silent> gS :<c-u>call scratch#copy(1)<cr>
 nnoremap gZzZz gs
