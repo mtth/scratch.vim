@@ -28,4 +28,5 @@ With `pathogen.vim`_:
 Otherwise simply copy the folders into your ``.vim`` directory.
 
 
+.. _pathogen.vim: https://github.com/tpope/vim-pathogen
 .. _scratch.vim: https://github.com/vim-scripts/scratch.vim
