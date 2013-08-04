@@ -3,6 +3,9 @@ Scratch.vim
 
 Unobtrusive scratch window. Inspired by scratch.vim_, enhanced.
 
+.. image:: doc/scratch.png
+   :align: center
+
 
 Features
 --------
