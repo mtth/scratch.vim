@@ -1,5 +1,5 @@
 *scratch.txt* Scratch and forget.                                        v1.0.0
-
+*Scratch*
 
 ==============================================================================
 CONTENTS                                                     *ScratchContents*
