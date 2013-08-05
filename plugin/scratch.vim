@@ -15,9 +15,11 @@ if !exists('g:scratch_top')
 endif
 
 command! -bang -nargs=0 Scratch call scratch#open(<bang>0)
+command! -bang -nargs=0 ScratchInsert call scratch#insert(<bang>0)
+command! -bang -nargs=0 -range ScratchSelection call scratch#selection(<bang>0)
 
 nnoremap <silent> gs :call scratch#insert(0)<cr>
 nnoremap <silent> gS :call scratch#insert(1)<cr>
-xnoremap <silent> gs :<c-u>call scratch#copy(0)<cr>
-xnoremap <silent> gS :<c-u>call scratch#copy(1)<cr>
+xnoremap <silent> gs :<c-u>call scratch#selection(0)<cr>
+xnoremap <silent> gS :<c-u>call scratch#selection(1)<cr>
 nnoremap gZzZz gs

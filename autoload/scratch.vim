@@ -92,7 +92,7 @@ function! scratch#insert(reset)
   startinsert!
 endfunction
 
-function! scratch#copy(reset)
+function! scratch#selection(reset) range
   " paste selection in scratch buffer
   let selection = s:get_selection()
   call scratch#open(a:reset)
