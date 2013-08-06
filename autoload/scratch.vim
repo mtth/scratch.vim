@@ -105,4 +105,6 @@ function! scratch#selection(reset) range
     call append(last_scratch_line, selection)
     silent execute 'normal! G$'
   endif
+  " remove trailing white space
+  silent execute '%s/\s\+$/'
 endfunction
