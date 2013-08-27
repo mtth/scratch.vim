@@ -106,5 +106,5 @@ function! scratch#selection(reset) range
     silent execute 'normal! G$'
   endif
   " remove trailing white space
-  silent execute '%s/\s\+$/'
+  silent! execute '%s/\s\+$/'
 endfunction
