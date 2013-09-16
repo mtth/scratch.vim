@@ -26,7 +26,7 @@ With `pathogen.vim`_:
 .. code:: bash
 
   $ cd ~/.vim/bundle
-  $ git clone https://github.com/mtth/locate.vim
+  $ git clone https://github.com/mtth/scratch.vim
 
 Otherwise simply copy the folders into your ``.vim`` directory.
 
