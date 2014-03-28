@@ -28,31 +28,31 @@ Unobtrusive scratch buffer.
 
 
 ------------------------------------------------------------------------------
-2.1 :Scratch[!]                                                     *:Scratch* 
+2.1 :Scratch[!]                                                     *:Scratch*
 
 Open scratch buffer. With [!], also clear scratch buffer.
 
-See |g:scratch_autohide|, |g:scratch_height|, and |g:scratch_top| for possible 
+See |g:scratch_autohide|, |g:scratch_height|, and |g:scratch_top| for possible
 configuration options.
 
 
 ------------------------------------------------------------------------------
 2.2 :ScratchInsert[!]                               *:ScratchInsert* *gs* *gS*
 
-Open scratch buffer and go directly into insert mode. When open with this 
-command, the scratch buffer will also automatically close after leaving insert 
+Open scratch buffer and go directly into insert mode. When open with this
+command, the scratch buffer will also automatically close after leaving insert
 mode.
 
-With [!] or when using the |gS| mapping, the buffer will also be cleared 
+With [!] or when using the |gS| mapping, the buffer will also be cleared
 before opening.
 
 
 ------------------------------------------------------------------------------
 2.3 :ScratchSelection[!]                     *:ScratchSelection* *v_gs* *v_gS*
 
-Open scratch buffer and append current selection. 
+Open scratch buffer and append current selection.
 
-With [!] or when using the |v_gS| mapping, the buffer will also be cleared 
+With [!] or when using the |v_gS| mapping, the buffer will also be cleared
 before opening.
 
 
