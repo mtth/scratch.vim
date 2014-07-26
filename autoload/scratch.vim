@@ -8,10 +8,10 @@ function! s:open_window(position)
   let scr_bufnum = bufnr('__Scratch__')
   if scr_bufnum == -1
     execute a:position . g:scratch_height . 'new __Scratch__'
+    execute 'setlocal filetype=' . g:scratch_filetype
     setlocal bufhidden=hide
     setlocal buflisted
     setlocal buftype=nofile
-    setlocal filetype=scratch
     setlocal foldcolumn=0
     setlocal nofoldenable
     setlocal nonumber

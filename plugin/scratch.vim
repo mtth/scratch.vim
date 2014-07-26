@@ -7,6 +7,9 @@ endif
 if !exists('g:scratch_autohide')
   let g:scratch_autohide = 1
 endif
+if !exists('g:scratch_filetype')
+  let g:scratch_filetype = 'scratch'
+endif
 if !exists('g:scratch_height')
   let g:scratch_height = 10
 endif

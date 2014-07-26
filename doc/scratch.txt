@@ -1,4 +1,4 @@
-*scratch.txt* Scratch and forget.                                       v1.0.0
+*scratch.txt* Scratch and forget.                                         v1.1
 *Scratch*
 
 ==============================================================================
@@ -12,8 +12,9 @@ CONTENTS                                                     *ScratchContents*
     3. Configuration ..................... |ScratchConfig|
       3.1 |g:scratch_autohide|
       3.2 |g:scratch_disable|
-      3.3 |g:scratch_height|
-      3.4 |g:scratch_top|
+      3.3 |g:scratch_filetype|
+      3.4 |g:scratch_height|
+      3.5 |g:scratch_top|
     4. Changes .......................... |ScratchChanges|
 
 
@@ -73,13 +74,19 @@ Disable plugin.
 
 
 ------------------------------------------------------------------------------
-3.3 g:scratch_height = 10                                   *g:scratch_height*
+3.3 g:scratch_filetype = scratch                          *g:scratch_filetype*
+
+Scratch window filetype. Useful for example for syntax highlighting.
+
+
+------------------------------------------------------------------------------
+3.4 g:scratch_height = 10                                   *g:scratch_height*
 
 Height of the scratch window.
 
 
 ------------------------------------------------------------------------------
-3.4 g:scratch_top = 1                                          *g:scratch_top*
+3.5 g:scratch_top = 1                                          *g:scratch_top*
 
 Open scratch window at the top of the screen instead of at the bottom.
 
@@ -87,5 +94,8 @@ Open scratch window at the top of the screen instead of at the bottom.
 ==============================================================================
 4. Changes                                                    *ScratchChanges*
 
-v1.0.0 (08/04/2013)
-  * Initial stable release.
+1.1 (07/26/2014)
+  + Added |g:scratch_filetype| configuration option.
+
+1.0 (08/04/2013)
+  + Initial stable release.
