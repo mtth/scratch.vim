@@ -82,7 +82,8 @@ Scratch window filetype. Useful for example for syntax highlighting.
 ------------------------------------------------------------------------------
 3.4 g:scratch_height = 10                                   *g:scratch_height*
 
-Height of the scratch window.
+Height of the scratch window. If a float is specified, it will be assumed to
+mean that fraction of the currently open window.
 
 
 ------------------------------------------------------------------------------

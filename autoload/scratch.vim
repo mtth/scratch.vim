@@ -7,7 +7,7 @@ function! s:open_window(position)
   " this will create the buffer if necessary
   let scr_bufnum = bufnr('__Scratch__')
   if scr_bufnum == -1
-    execute a:position . g:scratch_height . 'new __Scratch__'
+    execute a:position . s:resolve_height(g:scratch_height) . 'new __Scratch__'
     execute 'setlocal filetype=' . g:scratch_filetype
     setlocal bufhidden=hide
     setlocal buflisted
@@ -50,6 +50,18 @@ function! s:close_window(force)
 endfunction
 
 " utility
+
+function! s:resolve_height(height)
+  " if g:scratch_height is an int, return that number, else it is a float
+  " interpret it as a fraction of the screen height and return the
+  " corresponding number of lines
+  if has('float') && type(a:height) ==# 5 " type number for float
+    let abs_height = a:height * winheight(0)
+    return float2nr(abs_height)
+  else
+    return a:height
+  endif
+endfunction
 
 function! s:quick_insert()
   " leave scratch window after leaving insert mode and remove corresponding autocommand
