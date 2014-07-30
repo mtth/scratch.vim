@@ -1,4 +1,4 @@
-*scratch.txt* Scratch and forget.                                         v1.1
+*scratch.txt* Scratch and forget.                                         v1.2
 *Scratch*
 
 ==============================================================================
@@ -42,7 +42,7 @@ configuration options.
 
 Open scratch buffer and go directly into insert mode. When open with this 
 command, the scratch buffer will also automatically close after leaving insert 
-mode.
+mode (independent of |g:scratch_autohide|).
 
 With [!] or when using the |gS| mapping, the buffer will also be cleared 
 before opening.
