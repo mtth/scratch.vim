@@ -61,9 +61,9 @@ before opening.
 3. Configuration                                               *ScratchConfig*
 
 ------------------------------------------------------------------------------
-3.1 g:scratch_autohide = 1                                *g:scratch_autohide*
+3.1 g:scratch_autohide = &hidden                          *g:scratch_autohide*
 
-Automatically close scratch buffer window when leaving said scratch buffer.
+Automatically close scratch buffer window when leaving said scratch buffer. 
 Also allows Vim to quit when the scratch buffer is the last one displayed.
 
 
@@ -94,6 +94,10 @@ Open scratch window at the top of the screen instead of at the bottom.
 
 ==============================================================================
 4. Changes                                                    *ScratchChanges*
+
+1.2 (07/30/2014)
+  + Added dynamic |g:scratch_autohide| default.
+  + Added float support for |g:scratch_height|.
 
 1.1 (07/26/2014)
   + Added |g:scratch_filetype| configuration option.

@@ -5,7 +5,7 @@ if (exists('g:scratch_disable') && g:scratch_disable) || &compatible
 endif
 
 if !exists('g:scratch_autohide')
-  let g:scratch_autohide = 1
+  let g:scratch_autohide = &hidden
 endif
 if !exists('g:scratch_filetype')
   let g:scratch_filetype = 'scratch'
