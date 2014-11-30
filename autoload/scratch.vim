@@ -28,7 +28,7 @@ function! s:open_window(position)
         execute scr_winnum . 'wincmd w'
       endif
     else
-      execute a:position . g:scratch_height . 'split +buffer' . scr_bufnum
+      execute a:position . s:resolve_height(g:scratch_height) . 'split +buffer' . scr_bufnum
     endif
   endif
 endfunction

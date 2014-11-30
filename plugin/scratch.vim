@@ -11,7 +11,7 @@ if !exists('g:scratch_filetype')
   let g:scratch_filetype = 'scratch'
 endif
 if !exists('g:scratch_height')
-  let g:scratch_height = 10
+  let g:scratch_height = 0.2
 endif
 if !exists('g:scratch_top')
   let g:scratch_top = 1
