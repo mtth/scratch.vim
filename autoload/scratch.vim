@@ -10,7 +10,7 @@ function! s:open_window(position)
     execute a:position . s:resolve_height(g:scratch_height) . 'new __Scratch__'
     execute 'setlocal filetype=' . g:scratch_filetype
     setlocal bufhidden=hide
-    setlocal buflisted
+    setlocal nobuflisted
     setlocal buftype=nofile
     setlocal foldcolumn=0
     setlocal nofoldenable

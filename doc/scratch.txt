@@ -1,4 +1,4 @@
-*scratch.txt* Scratch and forget.                                         v1.2
+*scratch.txt* Scratch and forget.                                         v1.3
 *Scratch*
 
 ==============================================================================
@@ -94,6 +94,9 @@ Open scratch window at the top of the screen instead of at the bottom.
 
 ==============================================================================
 4. Changes                                                    *ScratchChanges*
+
+1.3 (12/06/2014)
+  + Set |nobuflisted| on the scratch buffer.
 
 1.2 (07/30/2014)
   + Added dynamic |g:scratch_autohide| default.
