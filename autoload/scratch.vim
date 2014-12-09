@@ -100,7 +100,6 @@ endfunction
 function! scratch#insert(reset)
   " open scratch buffer
   call scratch#open(a:reset)
-  autocmd InsertLeave <buffer> call <SID>quick_insert()
   startinsert!
 endfunction
 
