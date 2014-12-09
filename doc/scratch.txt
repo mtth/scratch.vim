@@ -15,7 +15,8 @@ CONTENTS                                                     *ScratchContents*
       3.3 |g:scratch_filetype|
       3.4 |g:scratch_height|
       3.5 |g:scratch_top|
-    4. Changes .......................... |ScratchChanges|
+    4. Key Mapping ..................  |ScratchKeyMapping|
+    5. Changes .......................... |ScratchChanges|
 
 
 ==============================================================================
@@ -29,31 +30,31 @@ Unobtrusive scratch buffer.
 
 
 ------------------------------------------------------------------------------
-2.1 :Scratch[!]                                                     *:Scratch* 
+2.1 :Scratch[!]                                                     *:Scratch*
 
 Open scratch buffer. With [!], also clear scratch buffer.
 
-See |g:scratch_autohide|, |g:scratch_height|, and |g:scratch_top| for possible 
+See |g:scratch_autohide|, |g:scratch_height|, and |g:scratch_top| for possible
 configuration options.
 
 
 ------------------------------------------------------------------------------
 2.2 :ScratchInsert[!]                               *:ScratchInsert* *gs* *gS*
 
-Open scratch buffer and go directly into insert mode. When open with this 
-command, the scratch buffer will also automatically close after leaving insert 
+Open scratch buffer and go directly into insert mode. When open with this
+command, the scratch buffer will also automatically close after leaving insert
 mode (independent of |g:scratch_autohide|).
 
-With [!] or when using the |gS| mapping, the buffer will also be cleared 
+With [!] or when using the |gS| mapping, the buffer will also be cleared
 before opening.
 
 
 ------------------------------------------------------------------------------
 2.3 :ScratchSelection[!]                     *:ScratchSelection* *v_gs* *v_gS*
 
-Open scratch buffer and append current selection. 
+Open scratch buffer and append current selection.
 
-With [!] or when using the |v_gS| mapping, the buffer will also be cleared 
+With [!] or when using the |v_gS| mapping, the buffer will also be cleared
 before opening.
 
 
@@ -63,7 +64,7 @@ before opening.
 ------------------------------------------------------------------------------
 3.1 g:scratch_autohide = &hidden                          *g:scratch_autohide*
 
-Automatically close scratch buffer window when leaving said scratch buffer. 
+Automatically close scratch buffer window when leaving said scratch buffer.
 Also allows Vim to quit when the scratch buffer is the last one displayed.
 
 
@@ -92,8 +93,22 @@ mean that fraction of the currently open window.
 Open scratch window at the top of the screen instead of at the bottom.
 
 
+------------------------------------------------------------------------------
+4                                                          *ScratchKeyMapping*
+
+To change default key mapping, it need to disable default key mapping: >
+
+  let g:scratch_no_mappings = 1
+
+And set your favorite keys like below: >
+
+  nmap <leader>gs <plug>(scratch-insert-reuse)
+  nmap <leader>gS <plug>(scratch-insert-clear)
+  xmap <leader>gs <plug>(scratch-selection-reuse)
+  xmap <leader>gS <plug>(scratch-selection-clear)
+
 ==============================================================================
-4. Changes                                                    *ScratchChanges*
+5. Changes                                                    *ScratchChanges*
 
 1.3 (12/06/2014)
   + Set |nobuflisted| on the scratch buffer.
@@ -107,3 +122,5 @@ Open scratch window at the top of the screen instead of at the bottom.
 
 1.0 (08/04/2013)
   + Initial stable release.
+
+vim:tw=78:ts=8:ft=help:norl:noet:fen:fdl=0:
