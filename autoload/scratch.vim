@@ -65,7 +65,9 @@ endfunction
 
 function! s:quick_insert()
   " leave scratch window after leaving insert mode and remove corresponding autocommand
-  autocmd! InsertLeave <buffer>
+  augroup ScratchInsertAutoHide
+    autocmd!
+  augroup END
   call s:close_window(1)
 endfunction
 
@@ -100,7 +102,12 @@ endfunction
 function! scratch#insert(reset)
   " open scratch buffer
   call scratch#open(a:reset)
-  autocmd InsertLeave <buffer> call <SID>quick_insert()
+  if g:scratch_insert_autohide
+    augroup ScratchInsertAutoHide
+      autocmd!
+      autocmd InsertLeave <buffer> call <SID>quick_insert()
+    augroup END
+  endif
   startinsert!
 endfunction
 

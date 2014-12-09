@@ -11,10 +11,11 @@ CONTENTS                                                     *ScratchContents*
       2.3 |:ScratchSelection|
     3. Configuration ..................... |ScratchConfig|
       3.1 |g:scratch_autohide|
-      3.2 |g:scratch_disable|
-      3.3 |g:scratch_filetype|
-      3.4 |g:scratch_height|
-      3.5 |g:scratch_top|
+      3.2 |g:scratch_insert_autohide|
+      3.3 |g:scratch_disable|
+      3.4 |g:scratch_filetype|
+      3.5 |g:scratch_height|
+      3.6 |g:scratch_top|
     4. Changes .......................... |ScratchChanges|
 
 
@@ -33,8 +34,8 @@ Unobtrusive scratch buffer.
 
 Open scratch buffer. With [!], also clear scratch buffer.
 
-See |g:scratch_autohide|, |g:scratch_height|, and |g:scratch_top| for possible 
-configuration options.
+See |g:scratch_autohide|, |g:scratch_insert_autohide|, |g:scratch_height|, and
+|g:scratch_top| for possible configuration options.
 
 
 ------------------------------------------------------------------------------
@@ -42,7 +43,8 @@ configuration options.
 
 Open scratch buffer and go directly into insert mode. When open with this 
 command, the scratch buffer will also automatically close after leaving insert 
-mode (independent of |g:scratch_autohide|).
+mode (independent of |g:scratch_autohide|). If you don't want to close
+automatically, see |g:scratch_insert_autohide|.
 
 With [!] or when using the |gS| mapping, the buffer will also be cleared 
 before opening.
@@ -68,26 +70,31 @@ Also allows Vim to quit when the scratch buffer is the last one displayed.
 
 
 ------------------------------------------------------------------------------
-3.2 g:scratch_disable = 0                                  *g:scratch_disable*
+3.2 g:scratch_insert_autohide = 1                  *g:scratch_insert_autohide*
+
+Automatically close scratch buffer window when leaving insert-mode.
+
+------------------------------------------------------------------------------
+3.3 g:scratch_disable = 0                                  *g:scratch_disable*
 
 Disable plugin.
 
 
 ------------------------------------------------------------------------------
-3.3 g:scratch_filetype = scratch                          *g:scratch_filetype*
+3.4 g:scratch_filetype = scratch                          *g:scratch_filetype*
 
 Scratch window filetype. Useful for example for syntax highlighting.
 
 
 ------------------------------------------------------------------------------
-3.4 g:scratch_height = 10                                   *g:scratch_height*
+3.5 g:scratch_height = 10                                   *g:scratch_height*
 
 Height of the scratch window. If a float is specified, it will be assumed to
 mean that fraction of the currently open window.
 
 
 ------------------------------------------------------------------------------
-3.5 g:scratch_top = 1                                          *g:scratch_top*
+3.6 g:scratch_top = 1                                          *g:scratch_top*
 
 Open scratch window at the top of the screen instead of at the bottom.
 
