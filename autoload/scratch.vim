@@ -91,7 +91,7 @@ function! scratch#open(reset)
   let position = g:scratch_top ? 'topleft ' : 'botright '
   call s:open_window(position)
   if a:reset
-    silent execute '%d'
+    silent execute '%d _'
   else
     silent execute 'normal! G$'
   endif
