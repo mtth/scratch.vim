@@ -21,8 +21,15 @@ command! -bang -nargs=0 Scratch call scratch#open(<bang>0)
 command! -bang -nargs=0 ScratchInsert call scratch#insert(<bang>0)
 command! -bang -nargs=0 -range ScratchSelection call scratch#selection(<bang>0)
 
-nnoremap <silent> gs :call scratch#insert(0)<cr>
-nnoremap <silent> gS :call scratch#insert(1)<cr>
-xnoremap <silent> gs :<c-u>call scratch#selection(0)<cr>
-xnoremap <silent> gS :<c-u>call scratch#selection(1)<cr>
-nnoremap gZzZz gs
+nnoremap <silent> <plug>(scratch-insert-reuse) :call scratch#insert(0)<cr>
+nnoremap <silent> <plug>(scratch-insert-clear) :call scratch#insert(1)<cr>
+xnoremap <silent> <plug>(scratch-selection-reuse) :<c-u>call scratch#selection(0)<cr>
+xnoremap <silent> <plug>(scratch-selection-clear) :<c-u>call scratch#selection(1)<cr>
+
+if !exists('g:scratch_no_mappings')
+  nmap gs <plug>(scratch-insert-reuse)
+  nmap gS <plug>(scratch-insert-clear)
+  xmap gs <plug>(scratch-selection-reuse)
+  xmap gS <plug>(scratch-selection-clear)
+  nnoremap gZzZz gs
+endif
