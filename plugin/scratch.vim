@@ -7,6 +7,9 @@ endif
 if !exists('g:scratch_autohide')
   let g:scratch_autohide = &hidden
 endif
+if !exists('g:scratch_insert_autohide')
+  let g:scratch_insert_autohide = 1
+endif
 if !exists('g:scratch_filetype')
   let g:scratch_filetype = 'scratch'
 endif
