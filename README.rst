@@ -40,15 +40,28 @@ for the full list of configuration options and more details on each.
 Installation
 ------------
 
-With `pathogen.vim`_:
+With `Pathogen.vim`_:
 
 .. code:: bash
 
-  $ cd ~/.vim/bundle
-  $ git clone https://github.com/mtth/scratch.vim
+  git clone https://github.com/mtth/scratch.vim ~/.vim/bundle/scratch
+
+With `Vundle.vim`_:
+
+.. code:: bash
+
+  Plugin 'mtth/scratch.vim'
+
+With `NeoBundle.vim`_:
+
+.. code:: bash
+
+  NeoBundle 'mtth/scratch.vim'
 
 Otherwise simply copy the folders into your `.vim` directory.
 
 
 .. _pathogen.vim: https://github.com/tpope/vim-pathogen
 .. _scratch.vim: https://github.com/vim-scripts/scratch.vim
+.. _vundle.vim: https://github.com/gmarik/Vundle.vim
+.. _neobundle.vim: https://github.com/Shougo/neobundle.vim
