@@ -48,13 +48,13 @@ With `Pathogen.vim`_:
 
 With `Vundle.vim`_:
 
-.. code:: bash
+.. code:: viml
 
   Plugin 'mtth/scratch.vim'
 
 With `NeoBundle.vim`_:
 
-.. code:: bash
+.. code:: viml
 
   NeoBundle 'mtth/scratch.vim'
 
