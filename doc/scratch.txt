@@ -1,4 +1,4 @@
-*scratch.txt* Scratch and forget.                                         v1.4
+*scratch.txt* Scratch and forget.                                         v2.0
 *Scratch*
 
 ==============================================================================
@@ -117,6 +117,10 @@ And set your favorite keys like below: >
 
 ==============================================================================
 5. Changes                                                    *ScratchChanges*
+
+2.0 (03/04/2015)
+  + Improve window auto-closing handling to allow for other autocommands to be 
+    run.
 
 1.4 (12/09/2014)
   + Add `g:scratch_no_mappings` and `g:scratch_insert_autohide` options.

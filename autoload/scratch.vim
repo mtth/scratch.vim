@@ -2,11 +2,25 @@
 
 " window handling
 
+function! s:activate_autocmds(bufnr)
+  augroup ScratchAutoHide
+    autocmd!
+    execute 'autocmd WinEnter <buffer=' . a:bufnr . '> nested call <SID>close_window(0)'
+    execute 'autocmd Winleave <buffer=' . a:bufnr . '> nested call <SID>close_window(1)'
+  augroup END
+endfunction
+
+function! s:deactivate_autocmds()
+  augroup ScratchAutoHide
+    autocmd!
+  augroup END
+endfunction
+
 function! s:open_window(position)
-  " open scratch buffer window and move to it
-  " this will create the buffer if necessary
-  let scr_bufnum = bufnr('__Scratch__')
-  if scr_bufnum == -1
+  " open scratch buffer window and move to it. this will create the buffer if
+  " necessary.
+  let scr_bufnr = bufnr('__Scratch__')
+  if scr_bufnr == -1
     execute a:position . s:resolve_height(g:scratch_height) . 'new __Scratch__'
     execute 'setlocal filetype=' . g:scratch_filetype
     setlocal bufhidden=hide
@@ -18,17 +32,16 @@ function! s:open_window(position)
     setlocal noswapfile
     setlocal winfixheight
     if g:scratch_autohide
-      autocmd BufEnter <buffer> call <SID>close_window(0)
-      autocmd BufLeave <buffer> call <SID>close_window(g:scratch_autohide)
+      call s:activate_autocmds(bufnr('%'))
     endif
   else
-    let scr_winnum = bufwinnr(scr_bufnum)
-    if scr_winnum != -1
-      if winnr() != scr_winnum
-        execute scr_winnum . 'wincmd w'
+    let scr_winnr = bufwinnr(scr_bufnr)
+    if scr_winnr != -1
+      if winnr() != scr_winnr
+        execute scr_winnr . 'wincmd w'
       endif
     else
-      execute a:position . s:resolve_height(g:scratch_height) . 'split +buffer' . scr_bufnum
+      execute a:position . s:resolve_height(g:scratch_height) . 'split +buffer' . scr_bufnr
     endif
   endif
 endfunction
@@ -37,10 +50,17 @@ function! s:close_window(force)
   " close scratch window if it is the last window open, or if force
   if a:force
     let prev_bufnr = bufnr('#')
-    close
-    execute bufwinnr(prev_bufnr) . 'wincmd w'
-  elseif winbufnr(2) ==# -1
-    if tabpagenr('$') ==# 1
+    let scr_bufnr = bufnr('__Scratch__')
+    if scr_bufnr != -1
+      " Temporarily deactivate these autocommands to prevent overflow, but
+      " still allow other autocommands to be executed.
+      call s:deactivate_autocmds()
+      close
+      execute bufwinnr(prev_bufnr) . 'wincmd w'
+      call s:activate_autocmds(scr_bufnr)
+    endif
+  elseif winbufnr(2) == -1
+    if tabpagenr('$') == 1
       bdelete
       quit
     else
@@ -68,7 +88,7 @@ function! s:quick_insert()
   augroup ScratchInsertAutoHide
     autocmd!
   augroup END
-  call s:close_window(1)
+  execute bufwinnr(bufnr('#')) . 'wincmd w'
 endfunction
 
 function! s:get_selection()
@@ -105,7 +125,7 @@ function! scratch#insert(reset)
   if g:scratch_insert_autohide
     augroup ScratchInsertAutoHide
       autocmd!
-      autocmd InsertLeave <buffer> call <SID>quick_insert()
+      autocmd InsertLeave <buffer> nested call <SID>quick_insert()
     augroup END
   endif
   startinsert!
