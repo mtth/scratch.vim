@@ -1,4 +1,4 @@
-*scratch.txt* Scratch and forget.                                         v2.0
+*scratch.txt* Scratch and forget.                                         v2.1
 *Scratch*
 
 ==============================================================================
@@ -16,6 +16,7 @@ CONTENTS                                                     *ScratchContents*
       3.4 |g:scratch_filetype|
       3.5 |g:scratch_height|
       3.6 |g:scratch_top|
+      3.7 |g:scratch_horizontal|
     4. Mappings ........................ |ScratchMappings|
     5. Changes .......................... |ScratchChanges|
 
@@ -90,14 +91,24 @@ Scratch window filetype. Useful for example for syntax highlighting.
 ------------------------------------------------------------------------------
 3.5 g:scratch_height = 10                                   *g:scratch_height*
 
-Height of the scratch window. If a float is specified, it will be assumed to 
-mean that fraction of the currently open window.
+Height (or width, if |g:scratch_horizontal| is set to 0) of the scratch window. 
+If a float is specified, it will be assumed to mean that fraction of the 
+currently open window.
 
 
 ------------------------------------------------------------------------------
 3.6 g:scratch_top = 1                                          *g:scratch_top*
 
-Open scratch window at the top of the screen instead of at the bottom.
+Open scratch window at the top of the screen instead of at the bottom. If 
+|g:scratch_horizontal| is set, this option will create the scratch window on 
+the left side.
+
+
+------------------------------------------------------------------------------
+3.7 g:scratch_horizontal = 1                            *g:scratch_horizontal*
+
+Open the scratch window in a horizontal split instead of a vertical one (see 
+also |g:scratch_top| to configure the position of the new window).
 
 
 ==============================================================================
@@ -117,6 +128,9 @@ And set your favorite keys like below: >
 
 ==============================================================================
 5. Changes                                                    *ScratchChanges*
+
+2.1 (03/20/2015)
+  + Add |g:scratch_horizontal| option.
 
 2.0 (03/04/2015)
   + Improve window auto-closing handling to allow for other autocommands to be 

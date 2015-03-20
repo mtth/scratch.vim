@@ -19,6 +19,9 @@ endif
 if !exists('g:scratch_top')
   let g:scratch_top = 1
 endif
+if !exists('g:scratch_horizontal')
+  let g:scratch_horizontal = 1
+endif
 
 command! -bang -nargs=0 Scratch call scratch#open(<bang>0)
 command! -bang -nargs=0 ScratchInsert call scratch#insert(<bang>0)

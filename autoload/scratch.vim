@@ -21,7 +21,8 @@ function! s:open_window(position)
   " necessary.
   let scr_bufnr = bufnr('__Scratch__')
   if scr_bufnr == -1
-    execute a:position . s:resolve_height(g:scratch_height) . 'new __Scratch__'
+    let cmd = g:scratch_horizontal ? 'new' : 'vnew'
+    execute a:position . s:resolve_height(g:scratch_height) . cmd . ' __Scratch__'
     execute 'setlocal filetype=' . g:scratch_filetype
     setlocal bufhidden=hide
     setlocal nobuflisted
@@ -41,7 +42,8 @@ function! s:open_window(position)
         execute scr_winnr . 'wincmd w'
       endif
     else
-      execute a:position . s:resolve_height(g:scratch_height) . 'split +buffer' . scr_bufnr
+      let cmd = g:scratch_horizontal ? 'split' : 'vsplit'
+      execute a:position . s:resolve_height(g:scratch_height) . cmd . ' +buffer' . scr_bufnr
     endif
   endif
 endfunction
