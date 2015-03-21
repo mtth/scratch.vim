@@ -75,11 +75,11 @@ endfunction
 
 function! s:resolve_height(height)
   " if g:scratch_height is an int, return that number, else it is a float
-  " interpret it as a fraction of the screen height and return the
+  " interpret it as a fraction of the screen height/width and return the
   " corresponding number of lines
   if has('float') && type(a:height) ==# 5 " type number for float
-    let abs_height = a:height * winheight(0)
-    return float2nr(abs_height)
+    let size = g:scratch_horizontal ? winheight(0) : winwidth(0)
+    return float2nr(a:height * size)
   else
     return a:height
   endif
