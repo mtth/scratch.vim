@@ -31,7 +31,8 @@ function! s:open_window(position)
     setlocal nofoldenable
     setlocal nonumber
     setlocal noswapfile
-    setlocal winfixsize
+    setlocal winfixheight
+    setlocal winfixwidth
     if g:scratch_autohide
       call s:activate_autocmds(bufnr('%'))
     endif
