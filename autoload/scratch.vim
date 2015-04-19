@@ -22,7 +22,7 @@ function! s:open_window(position)
   let scr_bufnr = bufnr('__Scratch__')
   if scr_bufnr == -1
     let cmd = g:scratch_horizontal ? 'new' : 'vnew'
-    execute a:position . s:resolve_height(g:scratch_height) . cmd . ' __Scratch__'
+    execute a:position . s:resolve_size(g:scratch_size) . cmd . ' __Scratch__'
     execute 'setlocal filetype=' . g:scratch_filetype
     setlocal bufhidden=hide
     setlocal nobuflisted
@@ -31,7 +31,7 @@ function! s:open_window(position)
     setlocal nofoldenable
     setlocal nonumber
     setlocal noswapfile
-    setlocal winfixheight
+    setlocal winfixsize
     if g:scratch_autohide
       call s:activate_autocmds(bufnr('%'))
     endif
@@ -43,7 +43,7 @@ function! s:open_window(position)
       endif
     else
       let cmd = g:scratch_horizontal ? 'split' : 'vsplit'
-      execute a:position . s:resolve_height(g:scratch_height) . cmd . ' +buffer' . scr_bufnr
+      execute a:position . s:resolve_size(g:scratch_size) . cmd . ' +buffer' . scr_bufnr
     endif
   endif
 endfunction
@@ -73,15 +73,15 @@ endfunction
 
 " utility
 
-function! s:resolve_height(height)
-  " if g:scratch_height is an int, return that number, else it is a float
-  " interpret it as a fraction of the screen height/width and return the
+function! s:resolve_size(size)
+  " if g:scratch_size is an int, return that number, else it is a float
+  " interpret it as a fraction of the screen size and return the
   " corresponding number of lines
-  if has('float') && type(a:height) ==# 5 " type number for float
-    let size = g:scratch_horizontal ? winheight(0) : winwidth(0)
-    return float2nr(a:height * size)
+  if has('float') && type(a:size) ==# 5 " type number for float
+    let win_size = g:scratch_horizontal ? winheight(0) : winwidth(0)
+    return float2nr(a:size * win_size)
   else
-    return a:height
+    return a:size
   endif
 endfunction
 
