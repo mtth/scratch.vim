@@ -74,7 +74,7 @@ endfunction
 " utility
 
 function! s:resolve_size(size)
-  " if g:scratch_size is an int, return that number, else it is a float
+  " if a:size is an int, return that number, else it is a float
   " interpret it as a fraction of the screen size and return the
   " corresponding number of lines
   if has('float') && type(a:size) ==# 5 " type number for float
