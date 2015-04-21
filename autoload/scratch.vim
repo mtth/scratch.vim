@@ -22,7 +22,7 @@ function! s:open_window(position)
   let scr_bufnr = bufnr('__Scratch__')
   if scr_bufnr == -1
     let cmd = g:scratch_horizontal ? 'new' : 'vnew'
-    execute a:position . s:resolve_size(g:scratch_size) . cmd . ' __Scratch__'
+    execute a:position . s:resolve_size(g:scratch_height) . cmd . ' __Scratch__'
     execute 'setlocal filetype=' . g:scratch_filetype
     setlocal bufhidden=hide
     setlocal nobuflisted
@@ -44,7 +44,7 @@ function! s:open_window(position)
       endif
     else
       let cmd = g:scratch_horizontal ? 'split' : 'vsplit'
-      execute a:position . s:resolve_size(g:scratch_size) . cmd . ' +buffer' . scr_bufnr
+      execute a:position . s:resolve_size(g:scratch_height) . cmd . ' +buffer' . scr_bufnr
     endif
   endif
 endfunction
