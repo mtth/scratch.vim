@@ -1,4 +1,4 @@
-*scratch.txt* Scratch and forget.                                         v2.1
+*scratch.txt* Scratch and forget.                                         v2.2
 *Scratch*
 
 ==============================================================================
@@ -128,6 +128,9 @@ And set your favorite keys like below: >
 
 ==============================================================================
 5. Changes                                                    *ScratchChanges*
+
+2.2 (04/21/2015)
+  + Add support for relative width.
 
 2.1 (03/20/2015)
   + Add |g:scratch_horizontal| option.
