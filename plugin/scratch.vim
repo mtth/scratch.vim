@@ -26,6 +26,7 @@ endif
 command! -bang -nargs=0 Scratch call scratch#open(<bang>0)
 command! -bang -nargs=0 ScratchInsert call scratch#insert(<bang>0)
 command! -bang -nargs=0 -range ScratchSelection call scratch#selection(<bang>0)
+command! -nargs=0 ScratchPreview call scratch#preview()
 
 nnoremap <silent> <plug>(scratch-insert-reuse) :call scratch#insert(0)<cr>
 nnoremap <silent> <plug>(scratch-insert-clear) :call scratch#insert(1)<cr>

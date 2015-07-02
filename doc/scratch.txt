@@ -1,4 +1,4 @@
-*scratch.txt* Scratch and forget.                                         v2.2
+*scratch.txt* Scratch and forget.                                         v3.1
 *Scratch*
 
 ==============================================================================
@@ -9,6 +9,7 @@ CONTENTS                                                     *ScratchContents*
       2.1 |:Scratch|
       2.2 |:ScratchInsert|
       2.3 |:ScratchSelection|
+      2.4 |:ScratchPreview|
     3. Configuration ..................... |ScratchConfig|
       3.1 |g:scratch_autohide|
       3.2 |g:scratch_insert_autohide|
@@ -58,6 +59,13 @@ Open scratch buffer and append current selection.
 
 With [!] or when using the |v_gS| mapping, the buffer will also be cleared 
 before opening.
+
+
+------------------------------------------------------------------------------
+2.4 :ScratchPreview                                          *:ScratchPreview*
+
+Toggle scratch buffer and keep cursor in current window. If called from the 
+scratch buffer, close it.
 
 
 ==============================================================================
@@ -128,6 +136,9 @@ And set your favorite keys like below: >
 
 ==============================================================================
 5. Changes                                                    *ScratchChanges*
+
+3.1 (07/02/2015)
+  + Add |:ScratchPreview| command.
 
 2.2 (04/21/2015)
   + Add support for relative width.

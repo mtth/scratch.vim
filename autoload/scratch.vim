@@ -3,11 +3,13 @@
 " window handling
 
 function! s:activate_autocmds(bufnr)
-  augroup ScratchAutoHide
-    autocmd!
-    execute 'autocmd WinEnter <buffer=' . a:bufnr . '> nested call <SID>close_window(0)'
-    execute 'autocmd Winleave <buffer=' . a:bufnr . '> nested call <SID>close_window(1)'
-  augroup END
+  if g:scratch_autohide
+    augroup ScratchAutoHide
+      autocmd!
+      execute 'autocmd WinEnter <buffer=' . a:bufnr . '> nested call <SID>close_window(0)'
+      execute 'autocmd Winleave <buffer=' . a:bufnr . '> nested call <SID>close_window(1)'
+    augroup END
+  endif
 endfunction
 
 function! s:deactivate_autocmds()
@@ -33,9 +35,7 @@ function! s:open_window(position)
     setlocal noswapfile
     setlocal winfixheight
     setlocal winfixwidth
-    if g:scratch_autohide
-      call s:activate_autocmds(bufnr('%'))
-    endif
+    call s:activate_autocmds(bufnr('%'))
   else
     let scr_winnr = bufwinnr(scr_bufnr)
     if scr_winnr != -1
@@ -149,4 +149,17 @@ function! scratch#selection(reset) range
   endif
   " remove trailing white space
   silent! execute '%s/\s\+$/'
+endfunction
+
+function! scratch#preview()
+  " toggle scratch window, keeping cursor in current window
+  let scr_winnr = bufwinnr('__Scratch__')
+  if scr_winnr != -1
+    execute scr_winnr . 'close'
+  else
+    call scratch#open(0)
+    call s:deactivate_autocmds()
+    execute bufwinnr(bufnr('#')) . 'wincmd w'
+    call s:activate_autocmds(bufnr('__Scratch__'))
+  endif
 endfunction
