@@ -16,6 +16,7 @@ Features
 + Scratch window automatically hides when inactive.
 + Mappings allow easy note taking and selection pasting directly into the 
   scratch buffer.
++ Optional persistence across sessions.
 
 
 Quickstart
@@ -30,6 +31,9 @@ Quickstart
   for quick notes.
 + `gs` in visual mode pastes the current selection (character-wise, line-wise 
   or block-wise) into the scratch buffer.
++ By default the contents of the scratch window are lost when leaving Vim. To
+  enable cross-session persistence, set the g:scratch_persistence_file option to
+  a valid file path.
 
 Both above mappings have a `gS` variant that clears the scratch buffer before 
 opening it. Note also that the auto-closing features require `hidden` to be set 
