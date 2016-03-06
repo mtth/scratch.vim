@@ -35,7 +35,6 @@ function! s:open_window(position)
     setlocal noswapfile
     setlocal winfixheight
     setlocal winfixwidth
-
     if strlen(g:scratch_persistence_file) > 0
         if filereadable(g:scratch_persistence_file)
             let read_cmd = ':r ' . g:scratch_persistence_file
@@ -43,7 +42,6 @@ function! s:open_window(position)
             execute 'normal! ggdd'
         endif
     endif
-
     call s:activate_autocmds(bufnr('%'))
   else
     let scr_winnr = bufwinnr(scr_bufnr)
@@ -59,13 +57,11 @@ function! s:open_window(position)
 endfunction
 
 function! s:close_window(force)
-
+  " close scratch window if it is the last window open, or if force
   if strlen(g:scratch_persistence_file) > 0
     let cmd = ':w ' . g:scratch_persistence_file
     execute cmd
   endif
-
-  " close scratch window if it is the last window open, or if force
   if a:force
     let prev_bufnr = bufnr('#')
     let scr_bufnr = bufnr('__Scratch__')
