@@ -1,4 +1,4 @@
-*scratch.txt* Scratch and forget.                                         v3.1
+*scratch.txt* Scratch and forget.                                         v3.2
 *Scratch*
 
 ==============================================================================
