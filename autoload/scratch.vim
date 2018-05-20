@@ -36,7 +36,7 @@ function! s:open_window(position)
     setlocal winfixheight
     setlocal winfixwidth
     if strlen(g:scratch_persistence_file) > 0
-        if filereadable(g:scratch_persistence_file)
+        if filereadable(fnamemodify(g:scratch_persistence_file, ':p'))
             let read_cmd = ':r ' . g:scratch_persistence_file
             execute read_cmd
             execute 'normal! ggdd'

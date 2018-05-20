@@ -1,4 +1,4 @@
-*scratch.txt* Scratch and forget.                                         v3.2
+*scratch.txt* Scratch and forget.                                         v3.3
 *Scratch*
 
 ==============================================================================
@@ -150,6 +150,9 @@ And set your favorite keys like below: >
 
 ==============================================================================
 5. Changes                                                    *ScratchChanges*
+
+3.3 (05/20/2018)
+  + Support `~` in persistence file path.
 
 3.1 (07/02/2015)
   + Add |:ScratchPreview| command.
