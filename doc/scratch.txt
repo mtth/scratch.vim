@@ -153,6 +153,7 @@ And set your favorite keys like below: >
 
 3.3 (05/20/2018)
   + Support `~` in persistence file path.
+  + Fix auto-close on first open with persistence enabled.
 
 3.1 (07/02/2015)
   + Add |:ScratchPreview| command.

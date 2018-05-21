@@ -36,11 +36,13 @@ function! s:open_window(position)
     setlocal winfixheight
     setlocal winfixwidth
     if strlen(g:scratch_persistence_file) > 0
-        if filereadable(fnamemodify(g:scratch_persistence_file, ':p'))
-            let read_cmd = ':r ' . g:scratch_persistence_file
-            execute read_cmd
-            execute 'normal! ggdd'
-        endif
+      if filereadable(fnamemodify(g:scratch_persistence_file, ':p'))
+        let cpo = &cpo
+        set cpo-=a
+        execute ':r ' . g:scratch_persistence_file
+        let &cpo = cpo
+        execute 'normal! ggdd'
+      endif
     endif
     call s:activate_autocmds(bufnr('%'))
   else
@@ -59,8 +61,7 @@ endfunction
 function! s:close_window(force)
   " close scratch window if it is the last window open, or if force
   if strlen(g:scratch_persistence_file) > 0
-    let cmd = ':w ' . g:scratch_persistence_file
-    execute cmd
+    execute ':w ' . g:scratch_persistence_file
   endif
   if a:force
     let prev_bufnr = bufnr('#')
