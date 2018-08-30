@@ -38,7 +38,7 @@ opening it. Note also that the auto-closing features require `hidden` to be set
 
 By default the contents of the scratch window are lost when leaving Vim. To 
 enable cross-session persistence, set the `g:scratch_persistence_file` option 
-to a valid file path. Optionally syntax highlighting can be enable for the 
+to a valid file path. Optionally syntax highlighting can be enabled for the 
 scratch window by setting `g:scratch_syntax` to the corresponding file type, 
 for example `let g:scratch_syntax = "markdown"`.
 
