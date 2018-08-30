@@ -35,6 +35,11 @@ function! s:open_window(position)
     setlocal noswapfile
     setlocal winfixheight
     setlocal winfixwidth
+
+    if g:scratch_syntax != ''
+      execute 'set ft=' . g:scratch_syntax
+    endif
+
     if strlen(g:scratch_persistence_file) > 0
       if filereadable(fnamemodify(g:scratch_persistence_file, ':p'))
         let cpo = &cpo

@@ -19,6 +19,7 @@ CONTENTS                                                     *ScratchContents*
       3.6 |g:scratch_top|
       3.7 |g:scratch_horizontal|
       3.8 |g:scratch_persistence_file|
+      3.9 |g:scratch_persistence_file|
     4. Mappings ........................ |ScratchMappings|
     5. Changes .......................... |ScratchChanges|
 
@@ -131,6 +132,15 @@ Absolute path results in global scratchpad:
 let g:scratch_persistence_file = '/tmp/scratch.vim'
 Projectwise scratchpads:
 let g:scratch_persistence_file = '.scratch.vim'
+
+
+------------------------------------------------------------------------------
+3.9 g:scratch_syntax = ''                                  *g:scratch_syntax*
+
+If set to a non-empty string, this will be set as the file type for the
+scratch window in order to enable syntax highlighting.
+
+let g:scratch_syntax = 'markdown'
 
 
 ==============================================================================
