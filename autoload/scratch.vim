@@ -61,7 +61,7 @@ endfunction
 function! s:close_window(force)
   " close scratch window if it is the last window open, or if force
   if strlen(g:scratch_persistence_file) > 0
-    execute ':w ' . g:scratch_persistence_file
+    execute ':w! ' . g:scratch_persistence_file
   endif
   if a:force
     let prev_bufnr = bufnr('#')
