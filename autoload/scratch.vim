@@ -19,12 +19,13 @@ function! s:deactivate_autocmds()
 endfunction
 
 function! s:open_window(position)
+  let l:size = s:resolve_size(g:scratch_height)
   " open scratch buffer window and move to it. this will create the buffer if
   " necessary.
   let scr_bufnr = bufnr('__Scratch__')
   if scr_bufnr == -1
     let cmd = g:scratch_horizontal ? 'new' : 'vnew'
-    execute a:position . s:resolve_size(g:scratch_height) . cmd . ' __Scratch__'
+    execute a:position . l:size . cmd . ' __Scratch__'
     execute 'setlocal filetype=' . g:scratch_filetype
     setlocal bufhidden=hide
     setlocal nobuflisted
@@ -53,9 +54,17 @@ function! s:open_window(position)
       endif
     else
       let cmd = g:scratch_horizontal ? 'split' : 'vsplit'
-      execute a:position . s:resolve_size(g:scratch_height) . cmd . ' +buffer' . scr_bufnr
+      execute a:position . l:size . cmd . ' +buffer' . scr_bufnr
     endif
   endif
+
+  if g:scratch_auto_height
+    let l:dynamic_height = line('$')
+    if l:dynamic_height < l:size
+      execute ':resize '.l:dynamic_height
+    endif
+  endif
+
 endfunction
 
 function! s:close_window(force)

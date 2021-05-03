@@ -25,6 +25,9 @@ endif
 if !exists('g:scratch_persistence_file')
   let g:scratch_persistence_file = ''
 endif
+if !exists('g:scratch_auto_height') || g:scratch_horizontal == 0
+  let g:scratch_auto_height = 0
+endif
 
 command! -bang -nargs=0 Scratch call scratch#open(<bang>0)
 command! -bang -nargs=0 ScratchInsert call scratch#insert(<bang>0)
