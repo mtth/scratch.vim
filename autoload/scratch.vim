@@ -143,7 +143,9 @@ function! scratch#insert(reset)
       autocmd InsertLeave <buffer> nested call <SID>quick_insert()
     augroup END
   endif
-  startinsert!
+  if g:scratch_start_in_insert_mode
+    startinsert!
+  endif
 endfunction
 
 function! scratch#selection(reset) range

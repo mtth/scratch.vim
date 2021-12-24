@@ -7,6 +7,9 @@ endif
 if !exists('g:scratch_autohide')
   let g:scratch_autohide = &hidden
 endif
+if !exists('g:scratch_start_in_insert_mode')
+  let g:scratch_start_in_insert_mode = 1
+endif
 if !exists('g:scratch_insert_autohide')
   let g:scratch_insert_autohide = 1
 endif

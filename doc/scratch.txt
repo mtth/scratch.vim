@@ -19,6 +19,7 @@ CONTENTS                                                     *ScratchContents*
       3.6 |g:scratch_top|
       3.7 |g:scratch_horizontal|
       3.8 |g:scratch_persistence_file|
+      3.9 |g:scratch_start_in_insert_mode|
     4. Mappings ........................ |ScratchMappings|
     5. Changes .......................... |ScratchChanges|
 
@@ -131,6 +132,12 @@ Absolute path results in global scratchpad:
 let g:scratch_persistence_file = '/tmp/scratch.vim'
 Projectwise scratchpads:
 let g:scratch_persistence_file = '.scratch.vim'
+
+
+------------------------------------------------------------------------------
+3.9 g:scratch_start_in_insert_mode = 1       *g:scratch_start_in_insert_mode
+
+Automatically start the scratch window in insert mode.
 
 
 ==============================================================================
